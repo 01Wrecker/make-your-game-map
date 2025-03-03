@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+*{
+    font-family: "Press Start 2P";
+    font-size: 13px;
+}
+body {
+    background: #16101A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    height: 90%;
+    width: 100%;
+    justify-content: center;
+    text-transform: uppercase;
+    gap: 24px;
+}
+
+.board {
+    /* padding-top: 65px; */
+    outline: solid 6px #ffffff2c;
+    border-radius: 16px;
+    flex-grow: 1;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 800px;
+    position: relative;
+    background: #2A242E;
+}
+
+.yamiin {
+    display: flex;
+    gap: 8px;
+}
+
+.ball {
+    will-change: transform;
+    position: absolute;
+    background-image: url("../Images/ball.png");
+    width: 24PX;
+    height: 24PX;
+    border-radius: 100%;
+}
+
+.paddle {
+    will-change: transform;
+    position: absolute;
+    width: 120px;
+    height: 24px;
+    /* background-color: rgb(28, 34, 32); */
+    background-image: url('/Images/vaus.png');
+    /* background-repeat: no-repeat; */
+    background-size: 100% 100%;
+}
+
+
+.headerContainer {
+    width: 800px;
+    height: 15%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.gameName {
+    font-family: 'Press Start 2P';
+    font-size: 24px;
+    color: white;
+    gap: 8px;
+}
+
+.score,
+.lifes,
+.timer {
+    display: flex;
+    width: max-content;
+    align-self: stretch;
+    gap: 10px;
+    padding: 10px 16px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    align-items: center;
+    color: #FFFFFF;
+}
+
+.zero {
+    opacity: 24%;
+}
+
+.lifes {
+    background-image: url('/Images/LivesRect.png');
+
+}
+
+.life.active {
+    background-image: url('/Images/heart.png');
+
+
+}
+
+.timer {
+    background-image: url('/Images/TimerRect.png');
+
+}
+.scr {
+    padding: 24px;
+    align-self: center;
+    text-align: center;
+}
+.InWon {
+    margin: 0px 24px;
+}
+.timer>img {
+    height: 24px;
+}
+
+.score {
+    background-image: url('/Images/ScoreRect.png');
+
+}
+
+.bricksContainer {
+    padding: 40px 60px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: auto;
+    gap: 5px;
+    justify-content: center;
+}
+
+.brick {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: max-content;
+}
+
+.Number {
+ 
+    font-weight: bolder;
+}
+
+.zero>img,
+.one>img,
+.two>img,
+.tree>img {
+    object-fit: contain;
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width:600px) {
+    .gameName {
+        display: none;
+    }
+
+    .HeaderContainer {
+        justify-content: center;
+    }
+}
+
+@media (max-width : 880px) {
+    .board {
+        width: 95%;
+    }
+    .headerContainer {
+        width: 95%;
+    }
+}
+
+@media (max-width: 460px) {
+    .bricksContainer {
+        padding: 24px 24px;
+    }
+
+    .ball {
+        width: 16PX;
+        height: 16PX;
+    }
+
+    .paddle {
+        width: 80px;
+        height: 20px;
+    }
+}
+
+@media (max-width:320px) {
+    .headerContainer {
+        transform: scale(0.7);
+    }
+
+}

@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap');
+
+.menu {
+    height: max-content;
+    padding-bottom: 16px;
+    width: 50%;
+    background: wheat;
+    position: absolute;
+    z-index: 4;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+}
+
+.menu.Hidden {
+    display: none;
+}
+.life {
+    height :26px;
+    width: 26px;
+    background-image: url('/Images/heartDown.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+
+.menu .Title {
+    width: 100%;
+    font-family: "Irish Grover", serif;
+    font-weight: bold;
+    font-size: x-large;
+    padding: 2% 0%;
+    border-bottom: 3px black solid;
+    align-items: center;
+    text-align: center;
+}
+.menu .Btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 8px 24px;
+}
+.menu .Btn {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 12px 16px;
+    background-color: white;
+}
+@media (max-width :400px) {
+    .menu {
+        width: 90%;
+    }
+   
+}
+@media (max-width : 200px) {
+    .Btn .BtnText {
+        display: none;
+    }
+    
+}
