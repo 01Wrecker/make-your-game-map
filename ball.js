@@ -55,7 +55,7 @@ Ball.prototype.move = function () {
 
     }
 
-    TheGame.bricksMap.forEach((br) => {
+    TheGame.bricksMap[TheGame.level].forEach((br) => {
         let boardBoundings = document.querySelector(".board").getBoundingClientRect()
         let brickBoundings = br.element.getBoundingClientRect()
         // checkking y axis
@@ -111,8 +111,12 @@ Ball.prototype.move = function () {
                     TheGame.NumOfBricks--
                     break;
             }
+            console.log(TheGame.NumOfBricks);
+            
             if (TheGame.NumOfBricks == 0) {
+                //TheGame.display()
                 document.querySelector('.win').classList.remove('Hidden')
+                TheGame.win = true
                 TheGame.isPaused = true
                 TheGame.ball.isMoving = false
                 

@@ -1,4 +1,5 @@
 import { Game } from "./game.js"
+import { kk } from "./map.js"
 
 export let TheGame = new Game()
 // display the board graphics
@@ -37,20 +38,29 @@ function main() {
     if (TheGame.ball.isMoving) {
         TheGame.ball.move(TheGame.paddle.positionY)
     }
-    if (TheGame.isPaused  ) {
+    if (TheGame.isPaused) {
         if (pressedKey === "Enter") {
             if (TheGame.lifes !== 0) {
                 TheGame.start()
                 TheGame.ball.isMoving = true
-            }else {
+            } else {
                 TheGame = new Game()
                 TheGame.display()
             }
-        }else if (pressedKey === "r") {
+        } else if (pressedKey === "r") {
             TheGame = new Game()
             TheGame.display()
-            console.log("game restarted!");
-            
+            console.log("game                                 restarted!");
+
+        } else if (pressedKey === "n" && TheGame.win) {
+            TheGame = new Game()
+            TheGame.level++
+            console.log();
+            TheGame.NumOfBricks = kk[TheGame.level]
+
+            TheGame.display()
+            TheGame.win = false
+            console.log("game restarted!", TheGame.level);
         }
     }
     if ((pressedKey === " " || pressedKey === "ArrowUp") && !TheGame.isPaused) {

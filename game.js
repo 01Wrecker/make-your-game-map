@@ -1,10 +1,12 @@
 import { Paddle } from "./paddle.js"
 import { Ball } from "./ball.js"
-import { Brick } from "./bricks.js"
 import { div } from "./utils/div.js"
 import { TheGame } from "./main.js"
+import { Map } from "./map.js"
+import { kk } from "./map.js"
 // import { TheGame } from "./main.js"
 export class Game {
+    win = false
     displayed = false
     lifes = 3
     timer = 0
@@ -16,38 +18,11 @@ export class Game {
     isPaused = false
     paddle = new Paddle()
     ball = new Ball()
+    level = 0
     //gameover = false
-    bricksMap = [
-        new Brick("tree"),
-        new Brick("tree"),
-        new Brick("tree"),
-        new Brick("tree"),
+    bricksMap = Map
+    NumOfBricks = kk[this.level]
 
-        new Brick("tree"),
-        new Brick("two"),
-        new Brick("tree"),
-        new Brick("one"),
-        new Brick("two"),
-
-        new Brick("one"),
-        new Brick("two"),
-        new Brick("two"),
-        new Brick("one"),
-        new Brick("two"),
-        new Brick("two"),
-        new Brick("two"),
-        new Brick("two"),
-
-        new Brick("two"),
-        new Brick("two"),
-        new Brick("two"),
-        new Brick("two"),
-        new Brick("tree"),
-        new Brick("tree"),
-        new Brick("one"),
-    ]
-    NumOfBricks = 52
-    
 }
 Game.prototype.displayHeader = function () {
     let image = document.createElement('img')
@@ -77,7 +52,7 @@ Game.prototype.displayHeader = function () {
 Game.prototype.changescore = function () {
     this.score++
     document.querySelector(".score .Number").textContent = this.score
-    document.querySelector(".scr").textContent = "your score is: "+ this.score
+    document.querySelector(".scr").textContent = "your score is: " + this.score
 
 }
 Game.prototype.removeLife = function () {
@@ -89,7 +64,7 @@ Game.prototype.removeLife = function () {
     }
     if (this.lifes === 0) {
         document.querySelector(".over").classList.remove("Hidden")
-        TheGame.isPaused =  true
+        TheGame.isPaused = true
         TheGame.ball.isMoving = false
         //this.pause()
         return
@@ -100,7 +75,7 @@ Game.prototype.won = function () {
     imag2.src = "./Images/restart.png"
     let win = div('win menu Hidden').add(
         div("Title", "You Won"),
-        div("scr" , "your score is :" + this.score),
+        div("scr", "your score is :" + this.score),
         div("Btn restart InWon").add(
             imag2, div("BtnText", "Restart (R)"),
         ),
@@ -146,18 +121,20 @@ Game.prototype.display = function () {
     document.body.append(Board)
     Board.append(this.displayMenu())
     Board.append(this.displayGameOver())
-
-    let bricksDiv = div("bricksContainer")
-    this.bricksMap.forEach((br, index) => {
-        let briick = br.displayBrick()
-        briick.classList += ` brick ${index}`
-        bricksDiv.append(briick)
-    })
-
+    let bricksDiv = this.displayedbrick(this.bricksMap[this.level])
     Board.append(this.won())
     Board.append(bricksDiv)
     this.paddle.display(),
         this.ball.display()
+}
+Game.prototype.displayedbrick = function (bricksap) {
+    let bricksDiv = div("bricksContainer")
+    bricksap.forEach((br, index) => {
+        let briick = br.displayBrick()
+        briick.classList += ` brick ${index}`
+        bricksDiv.append(briick)
+    })
+    return bricksDiv
 }
 Game.prototype.pause = function () {
     this.isPaused = true
