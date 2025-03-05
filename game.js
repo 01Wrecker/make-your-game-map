@@ -3,7 +3,7 @@ import { Ball } from "./ball.js"
 import { div } from "./utils/div.js"
 import { TheGame } from "./main.js"
 import { Map } from "./map.js"
-import { kk } from "./map.js"
+//import { kk } from "./map.js"
 // import { TheGame } from "./main.js"
 export class Game {
     win = false
@@ -18,10 +18,12 @@ export class Game {
     isPaused = false
     paddle = new Paddle()
     ball = new Ball()
+    map = new Map()
     level = 0
+    brick = this.map.generatbrick(this.level)
     //gameover = false
-    bricksMap = Map
-    NumOfBricks = kk[this.level]
+    bricksMap = this.brick.map    
+    NumOfBricks = this.brick.num
 
 }
 Game.prototype.displayHeader = function () {
@@ -121,7 +123,7 @@ Game.prototype.display = function () {
     document.body.append(Board)
     Board.append(this.displayMenu())
     Board.append(this.displayGameOver())
-    let bricksDiv = this.displayedbrick(this.bricksMap[this.level])
+    let bricksDiv = this.displayedbrick(this.bricksMap)
     Board.append(this.won())
     Board.append(bricksDiv)
     this.paddle.display(),

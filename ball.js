@@ -55,7 +55,7 @@ Ball.prototype.move = function () {
 
     }
 
-    TheGame.bricksMap[TheGame.level].forEach((br) => {
+    TheGame.bricksMap.forEach((br) => {
         let boardBoundings = document.querySelector(".board").getBoundingClientRect()
         let brickBoundings = br.element.getBoundingClientRect()
         // checkking y axis

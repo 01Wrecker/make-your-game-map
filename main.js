@@ -1,17 +1,18 @@
 import { Game } from "./game.js"
-import { kk } from "./map.js"
-
 export let TheGame = new Game()
 // display the board graphics
 TheGame.display()
 // Handling events
-let pressedKey
+let pressedKeys = []
 function HandleEvents() {
     document.addEventListener("keydown", function (event) {
-        pressedKey = event.key
+        if (!pressedKeys.includes(event.key)) {
+            pressedKeys.push(event.key)
+        }
     });
     document.addEventListener("keyup", function (event) {
-        pressedKey = null
+        let index = pressedKeys.indexOf(event.key);
+        pressedKeys.splice(index, 1);
     });
 }
 let timeout;
@@ -25,16 +26,10 @@ window.addEventListener("resize", () => {
 HandleEvents()
 // this will run aproximetly every 16ms
 function main() {
+    let pressedKey = pressedKeys[pressedKeys.length - 1]
     if (TheGame.started) {
         TheGame.incrementTimer()
     }
-    // if (TheGame.gameover) {
-    //     if (pressedKey === "Enter") {
-    //         TheGame = new Game()
-    //         TheGame.display()
-    //         console.log("game restarted");
-    //     }
-    // }
     if (TheGame.ball.isMoving) {
         TheGame.ball.move(TheGame.paddle.positionY)
     }
@@ -53,15 +48,13 @@ function main() {
             console.log("game                                 restarted!");
 
         } else if (pressedKey === "n" && TheGame.win) {
-            TheGame = new Game()
-            TheGame.level++
-            console.log();
-            TheGame.NumOfBricks = kk[TheGame.level]
-
-            TheGame.display()
-            TheGame.win = false
-            console.log("game restarted!", TheGame.level);
+            TheGame = new Game();
+            TheGame.level++; // Increment level after creating a new Game instance
+            TheGame.win = false; // Reset win status
+            console.log("Game restarted! Level:", TheGame.level);
+            TheGame.display();
         }
+        
     }
     if ((pressedKey === " " || pressedKey === "ArrowUp") && !TheGame.isPaused) {
         TheGame.start()
@@ -80,10 +73,3 @@ function main() {
 }
 requestAnimationFrame(main)
 
-// on key down Start the game
-// TheGame.start()
-// //on echap pause the game
-// TheGame.pause()
-// // restart the game // continue
-// //TheGame.restart()
-// // TheGame.continue()

@@ -1,67 +1,37 @@
 import { Brick } from "./bricks.js"
-export let kk = [
-    52,
-    46
-]
-export const Map = [[
-    new Brick("tree"),
-    new Brick("tree"),
-    new Brick("tree"),
-    new Brick("tree"),
+import { TheGame } from "./main.js"
+export class Map {
+    var = 0
+    kk = [
+        24,
+        46,
+        52
+    ]
+    map = [["zero", "one"],["zero", "one", "two"], ["zero", "one", "two", "tree"]]
+}
+Map.prototype.generatbrick = function (level) {
+    let obj = {
+        map: [],
+        num: 0
+    };
 
-    new Brick("tree"),
-    new Brick("two"),
-    new Brick("tree"),
-    new Brick("one"),
-    new Brick("two"),
+    let count = 0;
 
-    new Brick("one"),
-    new Brick("two"),
-    new Brick("two"),
-    new Brick("one"),
-    new Brick("two"),
-    new Brick("two"),
-    new Brick("two"),
-    new Brick("two"),
+    for (let i = 0; i < this.kk[level]; i++) {
+        let randomIndex = Math.floor(Math.random() * this.map[level].length);
+        let brickType = this.map[level][randomIndex];
 
-    new Brick("two"),
-    new Brick("two"),
-    new Brick("two"),
-    new Brick("two"),
-    new Brick("tree"),
-    new Brick("tree"),
-    new Brick("one"),
-],
-[
+        obj.map.push(new Brick(brickType));
 
-    new Brick("tree"),
-    new Brick("zero"),
-    new Brick("tree"),
-    new Brick("tree"),
+        if (brickType === "zero") count++;
+    }
 
-    new Brick("tree"),
-    new Brick("two"),
-    new Brick("tree"),
-    new Brick("one"),
-    new Brick("two"),
+    obj.num = this.kk[level] - count;
+    console.log(obj.num);
+    
 
-    new Brick("one"),
-    new Brick("two"),
-    new Brick("zero"),
-    new Brick("one"),
-    new Brick("zero"),
-    new Brick("two"),
-    new Brick("two"),
-    new Brick("two"),
+    return obj;
+};
 
-    new Brick("two"),
-    new Brick("two"),
-    new Brick("zero"),
-    new Brick("two"),
-    new Brick("tree"),
-    new Brick("tree"),
-    new Brick("one"),
 
-]
-
-]
+//console.log(TheGame.NumOfBricks);
